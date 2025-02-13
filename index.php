@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/all.min.css">
 </head>
 <body class="d-flex-column vh-100">
-    <nav class="navbar navbar-expand-lg bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg bg-secondary sticky-top">
         <div class= "container">
             <a href="index.php" class="navbar-brand text-white fw-bold">UMS Peduli</a>
             <?php
@@ -30,7 +30,7 @@
             <h1 class="fw-bold">UMS Peduli</h1>
             <p class="py-2">Mari bersama bantu saudara kita agar dapat mewujudkan mimpinya</p>
 
-            <div class="row bg-dark border border-light py-2 mt-5">
+            <div class="row bg-secondary border border-light py-2 mt-5">
                 <div class="col-md-4">
                     <?php 
                     $query = "SELECT SUM(nominal) AS total_donasi FROM donasi";
@@ -64,7 +64,7 @@
     
     <div class="container">
     <center><h2 class="fw-bold">Daftar Donatur Yang Bergabung</h2></center>
-    <table class="table table-dark">
+    <table class="table table-secondary">
         <thead>
             <tr>
                 <th>No</th>
@@ -95,7 +95,7 @@
     </table>
     <div>
 
-    <div class="bg-dark text-white text-center py-5 mt-auto">
+    <div class="bg-secondary text-white text-center py-5 mt-auto">
         <h3 class="fw-bold">Terima kasih telah berdonasi!</h3>
     </div>
 
