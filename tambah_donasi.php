@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="css/all.min.css">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg bg-dark sticky-top">
+        <div class="container">
+            <a href="index.php" class="navbar-brand text-white fw-bold">UMS Peduli</a>
+            <a href="logout.php" class="btn btn-danger">Logout</a>
+        </div>
+    </nav>
     <div class="container">
         <center>
             <h1>Tambah Data Donasi</h1>
@@ -35,6 +41,7 @@
                 <label for="tbTransfer" class="form-label">Transfer</label>
                 <input type="radio" name="metode" id="tbTransfer" class="form-check-input" value="Transfer">
             </div>
+
             <button type="submit" name="submit" class="btn btn-primary">Simpan Data</button>
             <button type="reset" class="btn btn-secondary">Reset Form</button>
         </form>
@@ -45,10 +52,17 @@
 
 <?php
 include 'koneksi.php'; 
+
+session_start();
+if ($_SESSION['is_login'] != true) {
+    header("Location:login.php?pesan=Silahkan Login terlebih dahulu");
+}
+
 if (isset($_POST['submit'])) { 
     $nama = $_POST['nama']; 
     $nominal = $_POST['nominal']; 
     $metode = $_POST['metode']; 
+    
     $query = "INSERT INTO donasi (nama, nominal, metode) VALUES ('$nama', $nominal, '$metode')"; 
     $result = mysqli_query($conn, $query); 
     if ($result) { 

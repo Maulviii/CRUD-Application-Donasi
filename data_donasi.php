@@ -4,15 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Donasi</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg bg-dark sticky-top">
+        <div class="container">
+            <a href="index.php" class="navbar-brand text-white fw-bold">UMS Peduli</a>
+            <a href="logout.php" class="btn btn-danger">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
     <center><h1>Data Donasi</h1></center>
-    <table>
+    <a href="tambah_donasi.php" class="btn btn-primary mb-2">Tambah Donasi</a>
+    <table class="table table-dark">
         <thead>
             <tr>
                 <th>No</th>
                 <th>Nama Donatur</th>
                 <th>Nominal</th>
+                <th>Metode Pembayaran</th>
                 <th>Tanggal Diterima</th>
                 <th>Aksi</th>
             </tr>
@@ -20,6 +32,12 @@
         <tbody>
             <?php
             include 'koneksi.php';
+
+            session_start();
+            if ($_SESSION['is_login'] != true) {
+                header("Location:login.php?pesan=Silahkan Login terlebih dahulu");
+            }
+
             $query = "SELECT * FROM donasi";
             $result = mysqli_query($conn, $query);
 
@@ -30,9 +48,10 @@
                 <td><?= $no ?></td>
                 <td><?= $row['nama']?></td>
                 <td>Rp. <?= $row['nominal']?></td>
+                <td><?= $row['metode']?></td>
                 <td><?= $row['tgl_diterima']?></td>
                 <td>
-                    <a href="ubah_donasi.php?id=<?= $row['id']?>" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i>"></a>
+                    <a href="ubah_donasi.php?id=<?= $row['id']?>" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a href="hapus_donasi.php?id=<?= $row['id']?>" class="btn btn-danger" onclick="return confirm('Apakah kamu yakin?')"><i class="fa-solid fa-trash-can"></i></a>
                 </td>
             </tr>
@@ -40,5 +59,6 @@
         </tbody>
     </table>
     <script src="js/bootstrap.min.js"></script>
+    </div>
 </body>
 </html>

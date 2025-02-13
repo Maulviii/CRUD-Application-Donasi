@@ -10,11 +10,14 @@
 <body class="bg-dark">
     <div class="container">
         <div class="d-flex justify-content-center align-items-center vh-100">
-            <div class="card-bg-light" style="width: 100%; max-width: 480px;">
-
-
+            <div class="card bg-light" style="width: 100%; max-width: 480px;">
                 <div class="card-body">
                     <h2>Login</h2>
+
+                    <?php if (isset($_GET['pesan'])) { ?>
+                        <div class="alert alert-danger"><?= $_GET['pesan'] ?></div>
+                    <?php } ?>
+
                     <form action="" method="post"> 
                     <label for="tbUsername">Username</label>
                     <input type="text" name="username" id="tbUsername" class="form-control">
@@ -26,6 +29,7 @@
             </div>
         </div>
     </div>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html> 
 
@@ -35,6 +39,10 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
 
     if ($username == 'admin' && $password == 'admin123') {
-        # code...
+        session_start();
+        $_SESSION['is_login'] = true;
+        header('Location:data_donasi.php');
+    } else {
+        header('Location:login.php?pesan=Username atau password salah!');
     }
 }
